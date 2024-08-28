@@ -3,18 +3,18 @@ import axios from "axios";
 import { json } from "react-router-dom";
 
 export const signup=createAsyncThunk("signup",async(obj)=>{
-    var res=await axios.post("http://localhost:4000/signup",obj)
+    var res=await axios.post("https://wingos-server.vercel.app/signup",obj)
     return res.data
 })
 
 
 export const signin=createAsyncThunk("signin",async(obj)=>{
-    var res=await axios.post("http://localhost:4000/signin",obj)
+    var res=await axios.post("https://wingos-server.vercel.app/signin",obj)
     return res.data
 })
 
 export const Logged=createAsyncThunk("logged",async(token)=>{
-    var res=await axios.get("http://localhost:4000/",{
+    var res=await axios.get("https://wingos-server.vercel.app/",{
         headers:{
             Authorization:`Bearer ${token}`
         }
@@ -23,12 +23,12 @@ export const Logged=createAsyncThunk("logged",async(token)=>{
 })
 
 export const forgetEmail=createAsyncThunk("forget",async(email)=>{
-    var res=await axios.post("http://localhost:4000/sendmail",email)
+    var res=await axios.post("https://wingos-server.vercel.app/sendmail",email)
     return res.data
 })
 
 export const changePassword=createAsyncThunk("Passwords",async({obj,token})=>{
-    var res=await axios.post("http://localhost:4000/changePassword",obj,{
+    var res=await axios.post("https://wingos-server.vercel.app/changePassword",obj,{
         headers:{
             Authorization:`Bearer ${token}`
         }

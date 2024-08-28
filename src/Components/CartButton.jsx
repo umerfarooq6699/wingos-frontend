@@ -61,7 +61,7 @@ const CartButton = () => {
         const headers = {
             "Content-Type": "application/json"
         }
-        const response = await fetch("http://localhost:4000/create-checkout-session", {
+        const response = await fetch("https://wingos-server.vercel.app/create-checkout-session", {
             method: "POST",
             headers: headers,
             body: JSON.stringify(body)

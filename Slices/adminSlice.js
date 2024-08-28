@@ -2,56 +2,56 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const productObj=createAsyncThunk("product",async(obj)=>{
-    var res=await axios.post("http://localhost:4000/addProduct",obj)
+    var res=await axios.post("https://wingos-server.vercel.app/addProduct",obj)
     return res.data
 })
 
 export const getProducts=createAsyncThunk("getProducts",async()=>{
-    var res=await axios.get("http://localhost:4000/getProduct")
+    var res=await axios.get("https://wingos-server.vercel.app/getProduct")
     return res.data
 })
 
 
 export const getUsers=createAsyncThunk("getUsers",async()=>{
-    var res=await axios.get("http://localhost:4000/getUser")
+    var res=await axios.get("https://wingos-server.vercel.app/getUser")
     return res.data
 })  
 
 export const getOrders=createAsyncThunk("orders",async()=>{
-    var res=await axios.get("http://localhost:4000/getallOrders")
+    var res=await axios.get("https://wingos-server.vercel.app/getallOrders")
     return res.data
 })
 
 
 export const getDashboardData=createAsyncThunk("dashboardData",async()=>{
-    var res=await axios.get("http://localhost:4000/getDashboardData")
+    var res=await axios.get("https://wingos-server.vercel.app/getDashboardData")
     return res.data
 })
 
 export const dashboardDeleteProduct=createAsyncThunk("deleteProduct",async(obj)=>{
-    var res=await axios.post("http://localhost:4000/deleteDashboardProduct",obj)
+    var res=await axios.post("https://wingos-server.vercel.app/deleteDashboardProduct",obj)
     return res.data
 })
 
 export const getsingleproduct=createAsyncThunk("getsingleproduct",async(id)=>{
-    var res=await axios.post("http://localhost:4000/getsingleproduct",{id})
+    var res=await axios.post("https://wingos-server.vercel.app/getsingleproduct",{id})
     return res.data
 })
 
 
 export const updatedProduct=createAsyncThunk("updatedProduct",async(obj)=>{
-    var res=await axios.post("http://localhost:4000/updatedProduct",obj)
+    var res=await axios.post("https://wingos-server.vercel.app/updatedProduct",obj)
     return res.data
 })
 
 export const deleteUser=createAsyncThunk("deleteUser",async(id)=>{
-    var res=await axios.post("http://localhost:4000/deleteUser",{id})
+    var res=await axios.post("https://wingos-server.vercel.app/deleteUser",{id})
     return res.data
 })
 
 
 export const removeOrder=createAsyncThunk("removeOrder",async(id)=>{
-    var res=await axios.delete(`http://localhost:4000/DeleteOrder/${id}`)
+    var res=await axios.delete(`https://wingos-server.vercel.app/DeleteOrder/${id}`)
     return res.data
 })
 

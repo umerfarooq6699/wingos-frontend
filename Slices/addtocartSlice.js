@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const orders = createAsyncThunk("order", async (ordersObj) => {
-    const res=await axios.post("http://localhost:4000/orders",ordersObj)
+    const res=await axios.post("https://wingos-server.vercel.app/orders",ordersObj)
     return res.data
 })
 
