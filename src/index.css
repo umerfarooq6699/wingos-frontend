@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+    scroll-behavior: smooth;
+}
+
+.hide-scrollbar {
+    -ms-overflow-style: none;
+    /* Internet Explorer 10+ */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+    /* Safari and Chrome */
+}
+
+@media screen and (min-width:490px) {
+    .dashboard_data{
+        display:flex;
+        justify-content:space-between;
+    }
+    .dashboard_data_top{
+        margin-top: 0;
+        margin-left:20px;
+    }
+}
