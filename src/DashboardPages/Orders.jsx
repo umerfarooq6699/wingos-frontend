@@ -82,11 +82,11 @@ const Orders = () => {
                 <DashboardNavbar />
                 <div className='w-full h-[91vh] grid grid-cols-5'>
 
-                    <div className='border border-blue-500 hidden lg:block'>
+                    <div className='hidden lg:block'>
                         <Sidebar />
                     </div>
 
-                    <div className='col-span-5 lg:col-span-4 border border-red-500 bg-gray-200 p-3 overflow-y-scroll'>
+                    <div className='col-span-5 lg:col-span-4 bg-gray-200 p-3 overflow-y-scroll'>
 
                         <div className='flex justify-between'>
                             <h1 className='font-[600] text-xl'>Orders</h1>

@@ -97,7 +97,7 @@ const Products = () => {
                 <DashboardNavbar />
                 <div className='w-full h-[89vh] grid grid-cols-5'>
 
-                    <div className='border border-blue-500 hidden lg:block'>
+                    <div className='hidden lg:block'>
                         <Sidebar />
                     </div>
 
