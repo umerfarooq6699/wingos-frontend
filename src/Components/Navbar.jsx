@@ -52,7 +52,7 @@ const Navbar = () => {
 
                 <div className='bg-[rgb(238,213,137)] text-[rgb(217,148,54)] hidden md:flex items-center rounded px-3 py-1 cursor-pointer'>
                     <i class="fa-solid fa-phone"></i>
-                    <h1 className='ml-2 font-[700]'>03041112117000000000000000000000</h1>
+                    <h1 className='ml-2 font-[700]'>03041112117</h1>
                 </div>
 
                 <div className='w-[50px]'>
