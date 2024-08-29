@@ -8,6 +8,7 @@ import { loadStripe } from '@stripe/stripe-js';
 const CartButton = () => {
     const { cartArray } = useSelector(state => state.Cart)
     const dispatch = useDispatch()
+    const { cartMsg } = useSelector(state => state.User)
     const [client, setclient] = useState(JSON.parse(localStorage.getItem("user")) || {})
     // console.log(cartArray, "cartArray")
     const [checkCart, setcheckCart] = useState(false)
@@ -32,48 +33,50 @@ const CartButton = () => {
     }, 0)
 
     const checkout = async () => {
-        const date = new Date()
-        const day = date.getDate()
-        const month = date.getMonth()
-        const year = date.getFullYear()
+        // const date = new Date()
+        // const day = date.getDate()
+        // const month = date.getMonth()
+        // const year = date.getFullYear()
 
 
-        const ordersObject = {
-            orderId: uuidv4(),
-            userId: client._id,
-            quantity: totalQuantity,
-            price: totalPrice,
-            time: `${day}-${month}-${year}`
-        }
+        // const ordersObject = {
+        //     orderId: uuidv4(),
+        //     userId: client._id,
+        //     quantity: totalQuantity,
+        //     price: totalPrice,
+        //     time: `${day}-${month}-${year}`
+        // }
 
-        dispatch(orders(ordersObject))
+        // dispatch(orders(ordersObject))
 
 
-        const stripe = await loadStripe("pk_test_51PM559G0hXsNMoU5CfIKz2RTXApJ33otkNaNnheIqeKfIzqJ4dnrWhLOoOd0Up9LfMhzbPG665J7uwThSjigWofT004OHJgSGw");
+        // const stripe = await loadStripe("pk_test_51PM559G0hXsNMoU5CfIKz2RTXApJ33otkNaNnheIqeKfIzqJ4dnrWhLOoOd0Up9LfMhzbPG665J7uwThSjigWofT004OHJgSGw");
 
-        const body = {
-            products: cartArray
-        }
-        const headers = {
-            "Content-Type": "application/json"
-        }
-        const response = await fetch("https://wingos-server.vercel.app/create-checkout-session", {
-            method: "POST",
-            headers: headers,
-            body: JSON.stringify(body)
-        });
+        // const body = {
+        //     products: cartArray
+        // }
+        // const headers = {
+        //     "Content-Type": "application/json"
+        // }
+        // const response = await fetch("https://wingos-server.vercel.app/create-checkout-session", {
+        //     method: "POST",
+        //     headers: headers,
+        //     body: JSON.stringify(body)
+        // });
 
-        const session = await response.json();
+        // const session = await response.json();
 
-        const result = stripe.redirectToCheckout({
-            sessionId: session.id
-        });
+        // const result = stripe.redirectToCheckout({
+        //     sessionId: session.id
+        // });
 
-        if (result.error) {
-            console.log(result.error);
-        }
+        // if (result.error) {
+        //     console.log(result.error);
+        // }
 
     }
+
+    
 
     return (
         <>

@@ -71,10 +71,10 @@ const Signin = () => {
   }
 
   // console.log(obj, "signup obj")
-  console.log(notification, "signin notification")
+  // console.log(notification, "signin notification")
   // console.log(token, "signin token")
   // console.log(User, "user")
-  console.log(client, "client")
+  // console.log(client, "client")
   return (
     <>
       <div><Toaster /></div>

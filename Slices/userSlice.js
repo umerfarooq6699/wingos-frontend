@@ -40,12 +40,13 @@ export const changePassword=createAsyncThunk("Passwords",async({obj,token})=>{
 const userSlice=createSlice({
     name:"user",
     initialState:{
-        notification:null,
+        notification:{},
+        cartMsg:{},
         client:{}
     },
     reducers:{
         emptyNotification:(state,action)=>{
-            state.notification=null
+            state.notification={}
         }
     },
     extraReducers:(builder)=>{
@@ -63,6 +64,7 @@ const userSlice=createSlice({
         })
         .addCase(Logged.fulfilled,(state,action)=>{
             console.log(action.payload)
+            state.cartMsg=action.payload
         })
         .addCase(changePassword.fulfilled,(state,action)=>{
             state.notification=action.payload

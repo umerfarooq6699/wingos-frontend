@@ -48,8 +48,8 @@ const ChangePassword = () => {
       toast.error("Please fill all the fields")
     }
   }
-  console.log(token, "change password token")
-  console.log(notification, "notification")
+  // console.log(token, "change password token")
+  console.log(notification, "notification change password")
   return (
     <>
       <div><Toaster /></div>

@@ -1,78 +1,87 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import emptyCart from '../assets/Images/empty-cart.webp'
 import { useDispatch, useSelector } from 'react-redux'
 import { clearCart, decrement, increment, orders } from '../../Slices/addtocartSlice'
 import { v4 as uuidv4 } from 'uuid';
 import { loadStripe } from '@stripe/stripe-js';
+import { emptyNotification, Logged } from '../../Slices/userSlice';
+import toast, { Toaster } from 'react-hot-toast';
 
 const Cart = () => {
     const { cartArray } = useSelector(state => state.Cart)
+    const [token, settoken] = useState()
     const [client, setclient] = useState(JSON.parse(localStorage.getItem("user")) || {})
     const dispatch = useDispatch()
+    const { cartMsg } = useSelector(state => state.User)
     // console.log(cartArray, "cartArray")
 
     const totalPrice = cartArray.reduce((a, b) => {
         return a + Number(b.quantity * b.price)
     }, 0)
-    // const total = cartArray.reduce((a, b) => {
-    //     return a + Number(b.price * b.quantity)
-    // }, 0)
 
     const totalQuantity = cartArray.reduce((a, b) => {
         return a + b.quantity
     }, 0)
-    // console.log(totalPrice)
 
+    useEffect(() => {
+        settoken(localStorage.getItem("token") || "")
+        if(cartMsg?.message){
+            toast.error(cartMsg.message)
+        }
+    }, [cartMsg])
+    
     const checkout = async () => {
-        const date = new Date()
-        const day = date.getDate()
-        const month = date.getMonth()
-        const year = date.getFullYear()
+        dispatch(Logged(token))
+        setTimeout(() => {
+            dispatch(emptyNotification())
+        }, 2000);
+
+        // const date = new Date()
+        // const day = date.getDate()
+        // const month = date.getMonth()
+        // const year = date.getFullYear()
 
 
-        const ordersObject = {
-            orderId: uuidv4(),
-            userId: client._id,
-            quantity: totalQuantity,
-            price: totalPrice,
-            time: `${day}-${month}-${year}`
-        }
+        // const ordersObject = {
+        //     orderId: uuidv4(),
+        //     userId: client._id,
+        //     quantity: totalQuantity,
+        //     price: totalPrice,
+        //     time: `${day}-${month}-${year}`
+        // }
 
-        dispatch(orders(ordersObject))
+        // dispatch(orders(ordersObject))
 
-        // console.log(date)
-        // console.log(ordersObject)
-        // console.log(client, "user local storage    ")
+        // const stripe = await loadStripe("pk_test_51PM559G0hXsNMoU5CfIKz2RTXApJ33otkNaNnheIqeKfIzqJ4dnrWhLOoOd0Up9LfMhzbPG665J7uwThSjigWofT004OHJgSGw");
 
+        // const body = {
+        //     products: cartArray
+        // }
+        // const headers = {
+        //     "Content-Type": "application/json"
+        // }
+        // const response = await fetch("https://wingos-server.vercel.app/create-checkout-session", {
+        //     method: "POST",
+        //     headers: headers,
+        //     body: JSON.stringify(body)
+        // });
 
-        const stripe = await loadStripe("pk_test_51PM559G0hXsNMoU5CfIKz2RTXApJ33otkNaNnheIqeKfIzqJ4dnrWhLOoOd0Up9LfMhzbPG665J7uwThSjigWofT004OHJgSGw");
+        // const session = await response.json();
 
-        const body = {
-            products: cartArray
-        }
-        const headers = {
-            "Content-Type": "application/json"
-        }
-        const response = await fetch("https://wingos-server.vercel.app/create-checkout-session", {
-            method: "POST",
-            headers: headers,
-            body: JSON.stringify(body)
-        });
+        // const result = stripe.redirectToCheckout({
+        //     sessionId: session.id
+        // });
 
-        const session = await response.json();
-
-        const result = stripe.redirectToCheckout({
-            sessionId: session.id
-        });
-
-        if (result.error) {
-            console.log(result.error);
-        }
+        // if (result.error) {
+        //     console.log(result.error);
+        // }
 
     }
-
+    
+    console.log(token, "cart token")
     return (
         <>
+        <div><Toaster/></div>
             <div className='w-full sticky top-0 bg-white shadow-2xl'>
 
                 {
