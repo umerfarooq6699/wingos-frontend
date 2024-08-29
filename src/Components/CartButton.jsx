@@ -48,10 +48,6 @@ const CartButton = () => {
 
         dispatch(orders(ordersObject))
 
-        // console.log(date)
-        // console.log(ordersObject)
-        // console.log(client, "user local storage    ")
-
 
         const stripe = await loadStripe("pk_test_51PM559G0hXsNMoU5CfIKz2RTXApJ33otkNaNnheIqeKfIzqJ4dnrWhLOoOd0Up9LfMhzbPG665J7uwThSjigWofT004OHJgSGw");
 
@@ -61,7 +57,7 @@ const CartButton = () => {
         const headers = {
             "Content-Type": "application/json"
         }
-        const response = await fetch("http://localhost:4000/create-checkout-session", {
+        const response = await fetch("https://wingos-server.vercel.app/create-checkout-session", {
             method: "POST",
             headers: headers,
             body: JSON.stringify(body)
