@@ -7,7 +7,7 @@ const Navbar = () => {
     const [user, setuser] = useState(JSON.parse(localStorage.getItem("user")) || {})
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const { count } = useSelector(state => state.User)
+    const { client } = useSelector(state => state.User)
     const [checkUser, setcheckUser] = useState(false)
     const userMenuRef = useRef(null)
 
@@ -46,6 +46,7 @@ const Navbar = () => {
 
     // console.log(checkUser)
     // console.log(user, "user")
+    console.log(client,"client")
     return (
         <>
             <div className='w-full h-[60px] bg-[rgb(217,148,54)] flex justify-between items-center px-9'>
@@ -59,16 +60,20 @@ const Navbar = () => {
                     <img src={logo} alt="" className='w-full h-full' />
                 </div>
 
-                {/* {
-                    user?.role === "admin" &&
-                    <Link to="/dashboard">
-                        <div className='text-white cursor-pointer'>Admin</div>
-                    </Link>
-                } */}
 
+                <div className='flex items-center'>
+                    {
+                        client?.role === "admin" &&
+                        <Link to="/dashboard">
+                            <div>
+                                <button className='bg-[rgb(238,213,137)] px-2 py-1 text-[rgb(221,148,54)] font-[600] rounded'>Admin</button>
+                            </div>
+                        </Link>
+                    }
 
-                <div onClick={handleUser} className='w-[20px] h-[20px] ml-5 cursor-pointer relative flex justify-center items-center'>
-                    <i title='user' className='fa-solid fa-user text-xl text-white'></i>
+                    <div onClick={handleUser} className='w-[20px] h-[20px] ml-3 cursor-pointer relative flex justify-center items-center'>
+                        <i title='user' className='fa-solid fa-user text-xl text-white'></i>
+                    </div>
                 </div>
 
                 <div ref={userMenuRef} className={`w-[100px] h-max bg-white p-1 z-20 ${checkUser ? "block" : "hidden"} shadow rounded absolute top-[50px] right-9 p-1`}>

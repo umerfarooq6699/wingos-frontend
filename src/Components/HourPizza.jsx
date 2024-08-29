@@ -22,9 +22,9 @@ const HourPizza = () => {
         })
     }, [])
 
-    console.log(loading, "loading")
-    console.log(productsArray,"productsArray")
-    console.log(notification,"productsArray notification")
+    // console.log(loading, "loading")
+    // console.log(productsArray,"productsArray")
+    // console.log(notification,"productsArray notification")
 
     return (
         <>
