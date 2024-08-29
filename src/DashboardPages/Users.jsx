@@ -48,10 +48,6 @@ const Users = () => {
         if(notification.success){
             toast.success(notification.message)
         }
-        // setTimeout(() => {
-        //     dispatch(dashboardNotificationEmpty())
-        // }, 2000);
-        // dispatch(getUsers())
     }
 
     const previous = () => {
