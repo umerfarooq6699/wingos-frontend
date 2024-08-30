@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { loadStripe } from '@stripe/stripe-js';
 import toast, { Toaster } from 'react-hot-toast';
 import { emptyCartMsg, emptyNotification, Logged } from '../../Slices/userSlice';
+import Navbar from "./Navbar"
 
 const CartButton = () => {
     const { cartArray } = useSelector(state => state.Cart)
@@ -110,7 +111,8 @@ const CartButton = () => {
 
                     {
                         cartArray && cartArray.length > 0 ?
-                            <>
+                        <>
+                        <Navbar/>
                                 <div className='w-full h-[100vh] shahow-2xl p-3 overflow-y-auto'>
                                     <div className='flex justify-between '>
                                         <h1 className='text-[rgb(33,37,41)] font-[500] text-2xl'>Your Cart</h1>
