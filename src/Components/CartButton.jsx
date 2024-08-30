@@ -1,14 +1,17 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import emptyCart from '../assets/Images/empty-cart.webp'
 import { clearCart, decrement, increment, orders } from '../../Slices/addtocartSlice'
 import { v4 as uuidv4 } from 'uuid';
 import { loadStripe } from '@stripe/stripe-js';
+import toast, { Toaster } from 'react-hot-toast';
+import { emptyCartMsg, emptyNotification, Logged } from '../../Slices/userSlice';
 
 const CartButton = () => {
     const { cartArray } = useSelector(state => state.Cart)
     const dispatch = useDispatch()
-    const { cartMsg } = useSelector(state => state.User)
+    const { cartBtnMsg } = useSelector(state => state.User)
+    const [token, settoken] = useState()
     const [client, setclient] = useState(JSON.parse(localStorage.getItem("user")) || {})
     // console.log(cartArray, "cartArray")
     const [checkCart, setcheckCart] = useState(false)
@@ -21,9 +24,9 @@ const CartButton = () => {
     const totalPrice = cartArray.reduce((a, b) => {
         return a + Number(b.quantity * b.price)
     }, 0)
-    
-    const handleOverlay=(event)=>{
-        if(event.target.classList.contains("overlay")){
+
+    const handleOverlay = (event) => {
+        if (event.target.classList.contains("overlay")) {
             setcheckCart(false)
         }
     }
@@ -32,7 +35,18 @@ const CartButton = () => {
         return a + b.quantity
     }, 0)
 
+    useEffect(() => {
+        settoken(localStorage.getItem("token") || "")
+        if (cartBtnMsg?.message) {
+            toast.error(cartBtnMsg.message)
+        }
+    }, [cartBtnMsg])
+
     const checkout = async () => {
+        dispatch(Logged(token))
+        setTimeout(() => {
+            dispatch(emptyCartMsg())
+        }, 2000);
         // const date = new Date()
         // const day = date.getDate()
         // const month = date.getMonth()
@@ -76,10 +90,13 @@ const CartButton = () => {
 
     }
 
-    
+
 
     return (
         <>
+            <div>
+                <Toaster />
+            </div>
             <div className='w-[100%] h-[60px] flex justify-center items-center shadow-2xl lg:hidden fixed bottom-0 bg-white'>
                 <div onClick={handleCart} className='w-[95%] h-[50px] flex justify-center items-center bg-[rgb(244,176,37)] text-white z-20 rounded-xl cursor-pointer'>
                     View Cart

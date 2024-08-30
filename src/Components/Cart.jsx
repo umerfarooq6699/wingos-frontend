@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { clearCart, decrement, increment, orders } from '../../Slices/addtocartSlice'
 import { v4 as uuidv4 } from 'uuid';
 import { loadStripe } from '@stripe/stripe-js';
-import { emptyNotification, Logged } from '../../Slices/userSlice';
+import { emptyCartMsg, emptyNotification, Logged } from '../../Slices/userSlice';
 import toast, { Toaster } from 'react-hot-toast';
 
 const Cart = () => {
@@ -25,15 +25,15 @@ const Cart = () => {
 
     useEffect(() => {
         settoken(localStorage.getItem("token") || "")
-        if(cartMsg?.message){
+        if (cartMsg?.message) {
             toast.error(cartMsg.message)
         }
     }, [cartMsg])
-    
+
     const checkout = async () => {
         dispatch(Logged(token))
         setTimeout(() => {
-            dispatch(emptyNotification())
+            dispatch(emptyCartMsg())
         }, 2000);
 
         // const date = new Date()
@@ -77,11 +77,11 @@ const Cart = () => {
         // }
 
     }
-    
+
     console.log(token, "cart token")
     return (
         <>
-        <div><Toaster/></div>
+            <div><Toaster /></div>
             <div className='w-full sticky top-0 bg-white shadow-2xl'>
 
                 {

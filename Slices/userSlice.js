@@ -42,12 +42,17 @@ const userSlice=createSlice({
     initialState:{
         notification:{},
         cartMsg:{},
-        client:{}
+        client:{},
+        cartBtnMsg:{}
     },
     reducers:{
         emptyNotification:(state,action)=>{
             state.notification={}
-        }
+        },
+        emptyCartMsg:(state,action)=>{
+            state.cartMsg={}
+            state.cartBtnMsg={}
+        },
     },
     extraReducers:(builder)=>{
         builder
@@ -64,7 +69,8 @@ const userSlice=createSlice({
         })
         .addCase(Logged.fulfilled,(state,action)=>{
             console.log(action.payload)
-            state.cartMsg=action.payload
+            // state.cartMsg=action.payload
+            state.cartBtnMsg=action.payload
         })
         .addCase(changePassword.fulfilled,(state,action)=>{
             state.notification=action.payload
@@ -74,5 +80,5 @@ const userSlice=createSlice({
         })
     }
 })
-export const {emptyNotification}=userSlice.actions
+export const {emptyNotification,emptyCartMsg}=userSlice.actions
 export default userSlice.reducer
