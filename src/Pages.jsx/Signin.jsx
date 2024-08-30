@@ -117,15 +117,9 @@ const Signin = () => {
               </button>
             </div>
 
-            {/* <input
-              type="password"
-              class="block border border-grey-light w-full p-3 rounded mb-4"
-              name="confirm_password"
-              placeholder="Confirm Password" /> */}
-
-            <div className='flex justify-end'>
+            {/* <div className='flex justify-end'>
               <Link to="/forgetpasswordform">Forget Password?</Link>
-            </div>
+            </div> */}
 
             <button onClick={handleSignin}
               type="submit"
