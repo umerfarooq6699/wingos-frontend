@@ -4,13 +4,16 @@ import emptyCart from '../assets/Images/empty-cart.webp'
 import { clearCart, decrement, increment, orders } from '../../Slices/addtocartSlice'
 import { v4 as uuidv4 } from 'uuid';
 import { loadStripe } from '@stripe/stripe-js';
-import toast, { Toaster } from 'react-hot-toast';
 import { emptyCartMsg, emptyNotification, Logged } from '../../Slices/userSlice';
 import Navbar from "./Navbar"
+import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CartButton = () => {
     const { cartArray } = useSelector(state => state.Cart)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const { cartBtnMsg } = useSelector(state => state.User)
     const [token, settoken] = useState()
     const [client, setclient] = useState(JSON.parse(localStorage.getItem("user")) || {})
@@ -39,7 +42,13 @@ const CartButton = () => {
     useEffect(() => {
         settoken(localStorage.getItem("token") || "")
         if (cartBtnMsg?.message) {
-            toast.error(cartBtnMsg.message)
+            toast.error(cartBtnMsg.message, {
+                position: "top-center",
+                autoClose:1500
+            })
+            setTimeout(() => {
+                navigate("/signin")
+            }, 2500);
         }
     }, [cartBtnMsg])
 
@@ -47,7 +56,7 @@ const CartButton = () => {
         dispatch(Logged(token))
         setTimeout(() => {
             dispatch(emptyCartMsg())
-        }, 2000);
+        }, 1500);
         // const date = new Date()
         // const day = date.getDate()
         // const month = date.getMonth()
@@ -91,12 +100,12 @@ const CartButton = () => {
 
     }
 
-
+    console.log(cartBtnMsg, "cartBtnMsg")
 
     return (
         <>
             <div>
-                <Toaster />
+                <ToastContainer />
             </div>
             <div className='w-[100%] h-[60px] flex justify-center items-center shadow-2xl lg:hidden fixed bottom-0 bg-white'>
                 <div onClick={handleCart} className='w-[95%] h-[50px] flex justify-center items-center bg-[rgb(244,176,37)] text-white z-20 rounded-xl cursor-pointer'>
@@ -111,8 +120,8 @@ const CartButton = () => {
 
                     {
                         cartArray && cartArray.length > 0 ?
-                        <>
-                        <Navbar/>
+                            <>
+                                <Navbar />
                                 <div className='w-full h-[100vh] shahow-2xl p-3 overflow-y-auto'>
                                     <div className='flex justify-between '>
                                         <h1 className='text-[rgb(33,37,41)] font-[500] text-2xl'>Your Cart</h1>

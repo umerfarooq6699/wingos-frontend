@@ -68,7 +68,7 @@ const userSlice=createSlice({
             }
         })
         .addCase(Logged.fulfilled,(state,action)=>{
-            console.log(action.payload)
+            // console.log(action.payload)
             // state.cartMsg=action.payload
             state.cartBtnMsg=action.payload
         })

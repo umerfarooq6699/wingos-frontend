@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { loadStripe } from '@stripe/stripe-js';
 import { emptyCartMsg, emptyNotification, Logged } from '../../Slices/userSlice';
 import toast, { Toaster } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
     const { cartArray } = useSelector(state => state.Cart)
@@ -13,6 +14,7 @@ const Cart = () => {
     const [client, setclient] = useState(JSON.parse(localStorage.getItem("user")) || {})
     const dispatch = useDispatch()
     const { cartMsg } = useSelector(state => state.User)
+    const navigate=useNavigate()
     // console.log(cartArray, "cartArray")
 
     const totalPrice = cartArray.reduce((a, b) => {
@@ -30,11 +32,13 @@ const Cart = () => {
         }
     }, [cartMsg])
 
+
     const checkout = async () => {
+        console.log("workingkkkkkkkkkkkkk")
         dispatch(Logged(token))
         setTimeout(() => {
             dispatch(emptyCartMsg())
-        }, 2000);
+        }, 1500);
 
         // const date = new Date()
         // const day = date.getDate()
@@ -78,7 +82,7 @@ const Cart = () => {
 
     }
 
-    console.log(token, "cart token")
+    // console.log(token, "cart token")
     return (
         <>
             <div><Toaster /></div>

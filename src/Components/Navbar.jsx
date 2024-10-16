@@ -46,7 +46,7 @@ const Navbar = () => {
 
     // console.log(checkUser)
     // console.log(user, "user")
-    console.log(client,"client")
+    // console.log(client,"client")
     return (
         <>
             <div className='w-full h-[60px] bg-[rgb(217,148,54)] flex justify-between items-center px-9'>
